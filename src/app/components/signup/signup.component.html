@@ -1,0 +1,194 @@
+<div
+  class="min-h-screen flex items-center justify-center bg-gray-100 flex flex-col"
+>
+  <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+      Register for Docquity
+    </h1>
+    <form (ngSubmit)="onUserSave()" [formGroup]="userForm">
+      <div class="space-y-4">
+        <!-- First Name -->
+        <div>
+          <input
+            type="text"
+            placeholder="First Name"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="firstName"
+          />
+          <p
+            class="text-red-500 text-sm mt-1"
+            *ngIf="
+              userForm.get('firstName')?.invalid &&
+              userForm.get('firstName')?.dirty
+            "
+          >
+            {{ userForm.get('firstName')?.hasError('required') ? 'First Name is required.' : 'Only alphabets are allowed.' }}
+          </p>
+        </div>
+
+        <!-- Last Name -->
+        <div>
+          <input
+            type="text"
+            placeholder="Last Name"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="lastName"
+          />
+          <p
+            class="text-red-500 text-sm mt-1"
+            *ngIf="
+              userForm.get('lastName')?.invalid &&
+              userForm.get('lastName')?.dirty
+            "
+          >
+            {{ userForm.get('lastName')?.hasError('required') ? 'Last Name is required.' : 'Only alphabets are allowed.' }}
+          </p>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <input
+          type="email"
+          placeholder="Email"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          formControlName="email"
+        />
+        <p
+          class="text-red-500 text-sm mt-1"
+          *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.dirty"
+        >
+          {{ userForm.get('email')?.hasError('required')
+            ? 'Email is required.'
+            : userForm.get('email')?.hasError('email')
+            ? 'Invalid email address.'
+            : 'Email must end with @docquity.com.' }}
+        </p>
+          <p
+              class="text-red-500 text-sm mt-1"
+              *ngIf="userForm.get('email')?.hasError('emailExists')"
+            >
+              <!-- Server-side Validation -->
+              Email already exists.
+            </p>
+        </div>
+
+        <!-- Username -->
+        <div>
+          <input
+            type="text"
+            placeholder="Username"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="userName"
+          />
+          <p
+            class="text-red-500 text-sm mt-1"
+            *ngIf="
+              userForm.get('userName')?.invalid &&
+              userForm.get('userName')?.dirty
+            "
+          >
+            {{ userForm.get('userName')?.hasError('required')
+              ? 'Username is required.'
+              : userForm.get('userName')?.hasError('minlength')
+              ? 'Minimum 4 characters required.'
+              : 'Username must contain only letters, numbers, or underscores.' }}
+          </p>
+
+          </div>
+
+
+        <!-- Password -->
+        <div>
+          <input
+            type="password"
+            placeholder="Password"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="password"
+          />
+          <p
+            class="text-red-500 text-sm mt-1"
+            *ngIf="
+              userForm.get('password')?.invalid &&
+              userForm.get('password')?.dirty
+            "
+          >
+            {{ userForm.get('password')?.hasError('required')
+              ? 'Password is required.'
+              : 'Must include uppercase, lowercase, number, special character, and min 8 chars.' }}
+          </p>
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="confirmPassword"
+          />
+          <p
+            class="text-red-500 text-sm mt-1"
+            *ngIf="
+              userForm.get('confirmPassword')?.invalid &&
+              userForm.get('confirmPassword')?.dirty
+            "
+          >
+          {{ userForm.get('confirmPassword')?.hasError('required') 
+          ? 'Confirm Password is required.' 
+          : userForm.hasError('passwordsMismatch') 
+            ? 'Password and Confirm Password must match.' 
+            : '' }}
+          </p>
+        </div>
+
+        <!-- Country -->
+        <div>
+          <select
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="country"
+          >
+            <option value="+1">+1 (USA)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+91">+91 (India)</option>
+            <option value="+61">+61 (Australia)</option>
+            <option value="+81">+81 (Japan)</option>
+          </select>
+        </div>
+
+        <!-- Mobile -->
+        <div>
+          <input
+            type="text"
+            placeholder="Mobile"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            formControlName="mobile"
+          />
+          <p
+            class="text-red-500 text-sm mt-1"
+            *ngIf="
+              userForm.get('mobile')?.invalid &&
+              userForm.get('mobile')?.dirty
+            "
+          >
+            Mobile number is required.
+          </p>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-blue-400 text-white py-2 rounded-md hover:bg-blue-500 transition"
+          [disabled]="userForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+    <p class="text-red-500 text-center mt-4" *ngIf="serverError">{{ serverError }}</p>
+    <p class="text-green-500 text-center mt-4" *ngIf="successMessage">{{ successMessage }}</p>
+    
+    <p class="text-center mt-4">
+      Already Registered? <a href="/" class="text-blue-500">Login</a>
+    </p>
+  </div>
+</div>
