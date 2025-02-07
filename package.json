@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch=false --configuration development",
     "test": "ng test",
-    "coverage": "ng test --code-coverage"
+    "coverage": "ng test --code-coverage",
+    "test:ci": "npm test -- --watch=false --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {

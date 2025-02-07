@@ -30,7 +30,7 @@ jobs:
       # - name: Run Tests
       #   run: npm test
       - name: Run tests in headless mode
-        run: npm run test -- --browsers ChromeHeadlessNoSandbox
+        run: npm run test:ci
  
       - name: Build Project (if applicable)
         run: npm run build
