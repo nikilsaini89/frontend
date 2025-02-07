@@ -17,21 +17,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.fetchStudentList();
   }
-
+  
   fetchStudentList(): void {
     
-    const token = localStorage.getItem('access_token'); // Extract token from localStorage
+    const token = localStorage.getItem('access_token'); 
 
     if (!token) {
       console.error('No token found!');
-      this.router.navigate(['/login']); // Redirect if token is missing
-      return;4
+      this.router.navigate(['/login']);
+      return;
     }
-
-    // Set up headers with the token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    // Make HTTP GET request with headers
     
     this.http.get(`${environment.backendUrl}/auth/dashboard`, { headers }).subscribe(
       (res: any) => {
@@ -45,9 +42,7 @@ export class DashboardComponent implements OnInit {
     );
   }
   onLogout(): void{
-    // Remove access_token from localStorage
     localStorage.removeItem('access_token');
-    // Redirect to the login page
     this.router.navigate(['/login']);
   }
 }

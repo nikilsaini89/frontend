@@ -126,6 +126,9 @@ export class SignupComponent implements OnInit {
           if (error.status === 409 && error.error.field === 'email') {
             this.userForm.get('email')?.setErrors({ emailExists: true });
           }
+          else if (error.status === 409 && error.error.field === 'username') {
+            this.userForm.get('userName')?.setErrors({ usernameExists: true }); 
+          }  
           else{
             this.serverError =
               'An unexpected error occurred. Please try again later.';

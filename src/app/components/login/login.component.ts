@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     const email = control.value;
     return email && email.endsWith('@docquity.com')
       ? null
-      : { invalidEmailDomain: true };
+      : { notADocquityEmail: true };
   }
  
   onLogin() {
@@ -88,10 +88,16 @@ export class LoginComponent implements OnInit {
           });
         },
         (error) => {
-          if (error.status === 409 && error.error.field === 'email') {
-            this.loginForm.get('email')?.setErrors({ emailExists: true });
+          if(error.error.field === 'email' && error.status === 404){
+            this.loginForm.get('email')?.setErrors({emailDoesNotExists: true});
+          } else if (error.error.field === 'password' && error.status === 400){
+            this.loginForm.get('password')?.setErrors({invalidPassword: true});
+          }
+          else{
+            console.log('Error while logging in - ', error);
           }
         }
+
       );
     } else {
       console.log('Form is invalid');

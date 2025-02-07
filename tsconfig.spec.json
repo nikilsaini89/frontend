@@ -10,6 +10,14 @@
   },
   "include": [
     "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "/src/**/*.d.ts",
+    "/src/**/*.spec.ts",
+    "**/*.spec.ts",
+    "**/*.d.ts",
+    "**/*.ts",
+    "**/*.spec.ts",
+    "**/*.d.ts",
+    "**/*"
   ]
 }

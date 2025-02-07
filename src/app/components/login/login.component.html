@@ -16,15 +16,18 @@
             formControlName="email"
           />
           <p
-            class="text-red-500 text-sm mt-1"
-            *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.dirty"
-          >
+          class="text-red-500 text-sm mt-1"
+          *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.dirty"
+        >
             {{ loginForm.get('email')?.hasError('required')
-              ? 'Email is required.'
-              : loginForm.get('email')?.hasError('email')
-              ? 'Invalid email address.'
-              : 'Email must end with @docquity.com.' }}
-          </p>
+            ? 'Email is required.'
+            : loginForm.get('email')?.hasError('email')
+            ? 'Invalid email address.'
+            : loginForm.get('email')?.hasError('emailDoesNotExists')
+            ? 'Email does not exists.'
+            : 'Email must end with @docquity.com.'
+          }}
+        </p>
           
         </div>
  
@@ -44,7 +47,10 @@
           >
             {{ loginForm.get('password')?.hasError('required')
               ? 'Password is required.'
-              : 'Must include uppercase, lowercase, number, special character, and min 8 chars.' }}
+              : loginForm.get('password')?.hasError('invalidPassword')
+              ? 'Hawww, Invalid password.'
+              : 'Must include uppercase, lowercase, number, special character, and min 8 chars.' 
+              }}
           </p>
         </div>
  
